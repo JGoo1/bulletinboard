@@ -1,4 +1,4 @@
-# Toy-Projects: bulletnboard
+# Toy-Projects: bulletinboard
  - Language: Python, HTML
  - Framework: Flask, swaager, bootstrap
  - DB: MongoDB
