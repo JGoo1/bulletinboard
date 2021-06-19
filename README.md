@@ -5,5 +5,5 @@
  - CI/CD: Jenkins
  
  Project Goal:
-  - Bulletin board contents CRUD RestAPI design & development
-  - OIDC authservice System implementation 
+  - RestAPI design & development for Bulletin board system
+  - Implementation of OIDC authservice 
