@@ -1,12 +1,13 @@
 from flask import Flask, jsonify
-from flasgger import Swagger
+from flasgger import Swagger, swag_from
 
 app = Flask(__name__)
 swagger = Swagger(app)
 
 @app.route('/colors/<palette>/')
+@swag_from('colors.yml')
 def colors(palette):
-    # http://127.0.0.1:5000/apidocs/
+    #http://127.0.0.1:5000/apidocs/
     all_colors = {
         'cmyk': ['cian', 'magenta', 'yellow', 'black'],
         'rgb': ['red', 'green', 'blue']
