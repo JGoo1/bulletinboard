@@ -3,28 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-<h1>{{ post_detail.subject }}</h1>
 
-<div>
-    {{ post_detail.content }}
-</div>
-{% if answer_list %}
-<h5>{{ answer_list.count() }}개의 답변이 있습니다.</h5>
-{% endif %}
-
-<div>
-    <ul>
+<div class="container my-3">
+    <h2 class="border-bottom py-2">{{ post_detail.subject }}</h2>
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="card-text" style="white-space: pre-line;">{{ post_detail.content }}</div>
+            <div class="d-flex justify-content-end">
+                <div class="badge badge-light p-2">
+                    {{ post_detail.create_date }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <h5 class="border-bottom my-3 py-2">{{ answer_list.count() }}개의 답변이 있습니다.</h5>
     {% for answer in answer_list %}
-        <li>{{ answer.content }}</li>
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="card-text" style="white-space: pre-line;">{{ answer.content }}</div>
+            <div class="d-flex justify-content-end">
+                <div class="badge badge-light p-2">
+                    {{ answer.create_date }}
+                </div>
+            </div>
+        </div>
+    </div>
     {% endfor %}
-    </ul>
+    <form action="{{ url_for('answer.create', post_id=post_id) }}" method="post" class="my-3">
+        <div class="form-group">
+            <textarea name="content" id="content" class="form-control" rows="10"></textarea>
+        </div>
+        <input type="submit" value="Submit" class="btn btn-primary">
+    </form>
 </div>
-<form action="{{ url_for('answer.create', post_id=post_id) }}" method="post">
-    <textarea name="content" id="content" rows="15"></textarea>
-    <input type="submit" value="답변등록">
-</form>
-
-</body>
-</html>
