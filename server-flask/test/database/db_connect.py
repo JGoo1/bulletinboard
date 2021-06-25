@@ -22,7 +22,7 @@ q2 = {
 question.insert_one(q1)
 question.insert_one(q2)
 
-answer = mongo.db.answer
+reply = mongo.db.reply
 q1 = {
     "id": 1,
     "post_id":2,
@@ -35,6 +35,6 @@ q2 = {
     "content":'id는 키값입니다.',
     "create_date" :datetime.now()
 }
-answer.insert_one(q1)
-answer.insert_one(q2)
+reply.insert_one(q1)
+reply.insert_one(q2)
 print("Success!")

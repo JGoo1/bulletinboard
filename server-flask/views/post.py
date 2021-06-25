@@ -1,20 +1,34 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, url_for, request
 from ..service.post_service import PostService
-from ..service.answer_service import AnswerService
+from ..service.reply_service import ReplyService
+from werkzeug.utils import redirect
+from  ..form.post import PostForm
 
-bp = Blueprint('post', __name__, url_prefix='/')
+bp = Blueprint('post', __name__, url_prefix='/post')
 post_service = PostService()
-answer_service = AnswerService()
+reply_service = ReplyService()
 
-@bp.route('/list')
+@bp.route('/', methods=('GET',))
 def _list():
     post_list = post_service.get_post_list()
     return render_template('post_list.html', post_list=post_list)
 
+@bp.route('/create/', methods=('GET','POST',))
+def create():
+    form = PostForm()
+    if request.method == 'GET':
+        return render_template('post_create.html', form=form)
 
-@bp.route('/post/<int:post_id>/')
+    elif request.method == 'POST':
+        post_service.create(subject=form.subject.data, content=form.content.data)
+        return redirect(url_for('post._list'))
+    else:
+        return redirect(url_for('post._list'))
+
+
+@bp.route('/<int:post_id>/')
 def detail(post_id):
     post_detail = post_service.get_post(id=post_id)
-    answer_list = answer_service.get_answer_list(post_id=post_id)
-    return render_template('post_detail.html', post_detail=post_detail, answer_list=answer_list)
+    reply_list = reply_service.get_reply_list(post_id=post_id)
+    return render_template('post_detail.html', post_detail=post_detail, reply_list=reply_list)
 

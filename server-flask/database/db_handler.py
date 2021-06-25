@@ -1,4 +1,4 @@
-from pymongo import MongoClient
+from pymongo import MongoClient, ReturnDocument
 
 
 class DBHandler:
@@ -42,3 +42,10 @@ class DBHandler:
     def text_search(self, text=None, db_name=None, collection_name=None):
         result = self.client[db_name][collection_name].find({"$text": {"$search": text}})
         return result
+
+    def get_next_seq(self, query=None, db_name=None):
+        collection_name="counters"
+        update = {"$inc": {"seq": 1}}
+        res = self.client[db_name][collection_name].find_and_modify(query=query, update=update,
+                                                               return_document=ReturnDocument.AFTER)
+        return res["seq"]

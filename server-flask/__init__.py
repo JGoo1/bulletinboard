@@ -1,5 +1,5 @@
 from flask import Flask
-from .views import main, post, answer
+from .views import main, post, reply
 from flask_migrate import Migrate
 from flask_pymongo import PyMongo
 
@@ -16,4 +16,4 @@ migrate.init_app(app, db)
 
 app.register_blueprint(main.bp)
 app.register_blueprint(post.bp)
-app.register_blueprint(answer.bp)
+app.register_blueprint(reply.bp)

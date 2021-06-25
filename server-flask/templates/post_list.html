@@ -23,7 +23,7 @@
         <tr>
             <td>{{ loop.index }}</td>
             <td>
-                <li><a href="{{url_for('post.detail', post_id=post.id)}}">{{ post.subject }}</a></li>
+                <a href="{{url_for('post.detail', post_id=post.id)}}">{{ post.subject }}</a>
             </td>
             <td>{{ post.create_date }}</td>
         </tr>
@@ -35,6 +35,8 @@
         {% endif %}
         </tbody>
     </table>
+
+    <a href="{{ url_for('post.create') }}" class="btn btn-primary">New Post</a>
 </div>
 
 </body>
