@@ -3,17 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Create post</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 <div class="container">
     <h5 class="my-3 border-bottom pb-2">New Post</h5>
     <form method="post" class="post-form my-3">
 
-        {{ form.subject.label }}
-        {{ form.subject() }}
+        <div class="form-group">
+            <label for="subject">{{ form.subject.label }}</label>
+            <input type="text" class="form-control" name="subject" id="subject">
+        </div>
 
-        {{ form.content.label }}
-        {{ form.content() }}
+        <div class="form-group">
+            <label for="content">{{ form.content.label }}</label>
+            <textarea type="text" class="form-control" name="content" id="content" rows="5"></textarea>
+        </div>
 
         <button type="submit" class="btn btn-primary">Save</button>
     </form>
